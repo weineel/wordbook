@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "version": "0.0.1",
+  "description": "单词本",
+  "repository": "https://github.com/weineel/wordbook.git",
+  "author": "weineel",
+  "license": "MIT",
+  "scripts": {
+    "build": "lerna exec yarn build",
+    "dev": "lerna exec yarn dev"
+  },
+  "devDependencies": {
+    "lerna": "^3.13.0"
+  }
+}
