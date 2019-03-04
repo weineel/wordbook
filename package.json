@@ -10,6 +10,7 @@
     "dev": "lerna exec yarn dev"
   },
   "devDependencies": {
+    "@types/node": "^11.10.4",
     "lerna": "^3.13.0"
   }
 }

@@ -7,8 +7,19 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "add -p",
+      "program": "${workspaceFolder}/packages/cli/dist/index.js",
+      "args": ["add", "generic types", "-p", "n", "-p", "adj", "-e", "泛型", "-s", "Generic types (or generics) bear a superficial resemblance to templates in C++, both in their syntax and in their expected use cases (such as container classes)."],
+      "outFiles": [
+        "${workspaceFolder}/**/*.js"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Launch Program",
       "program": "${workspaceFolder}/packages/cli/dist/index.js",
+      "args": ["-x", "xxdss", "add", "weineel-w"],
       "outFiles": [
         "${workspaceFolder}/**/*.js"
       ]
