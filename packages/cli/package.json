@@ -1,6 +1,6 @@
 {
   "name": "@wordbook/cli",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "description": "命令行",
   "author": "weineel <LiJF_wn@163.com>",
   "homepage": "https://github.com/weineel/wordbook#readme",
@@ -31,7 +31,7 @@
     "url": "https://github.com/weineel/wordbook/issues"
   },
   "dependencies": {
-    "@wordbook/backend": "^0.0.1-alpha.1",
+    "@wordbook/backend": "^0.0.1-alpha.2",
     "chalk": "^2.4.2",
     "commander": "^2.19.0",
     "ora": "^3.2.0"
