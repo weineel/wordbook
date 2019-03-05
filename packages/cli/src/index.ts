@@ -2,6 +2,7 @@
 
 import program from 'commander'
 import chalk from 'chalk'
+import { add, Word } from '@wordbook/backend'
 
 program
   .version(require('../package.json').version, '-v, --version')
@@ -18,6 +19,15 @@ program
   .option('-t, --tag <a>[,b]*', '标签，多个时使用 , 隔开。', list)
   .action((word, cmd) => {
     console.warn(word, cmd.pos, cmd.explanation)
+    const wordObj: Word = {
+      word,
+      pos: cmd.pos,
+      explanation: cmd.explanation,
+      tag: cmd.tag,
+      sample: [],
+      note: []
+    }
+    add(wordObj)
   })
   
 program

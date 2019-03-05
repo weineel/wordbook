@@ -7,6 +7,16 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "june",
+      "program": "${workspaceFolder}/packages/cli/dist/index.js",
+      "args": ["add", "-p", "n", "-e", "月儿", "-t", "name,wife", "june"],
+      "outFiles": [
+        "${workspaceFolder}/**/*.js"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "add -p",
       "program": "${workspaceFolder}/packages/cli/dist/index.js",
       "args": ["add", "generic types", "-p", "n", "-p", "adj", "-e", "泛型", "-s", "Generic types (or generics) bear a superficial resemblance to templates in C++, both in their syntax and in their expected use cases (such as container classes)."],

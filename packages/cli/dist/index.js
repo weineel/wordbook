@@ -6,6 +6,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var commander_1 = __importDefault(require("commander"));
 var chalk_1 = __importDefault(require("chalk"));
+var backend_1 = require("@wordbook/backend");
 commander_1.default
     .version(require('../package.json').version, '-v, --version')
     .option('-x, --xe <xee>', 'xxxxx') // 根选项, 优先级比子命令高(同名时，子命令将不会被解析到)。
@@ -20,6 +21,15 @@ commander_1.default
     .option('-t, --tag <a>[,b]*', '标签，多个时使用 , 隔开。', list)
     .action(function (word, cmd) {
     console.warn(word, cmd.pos, cmd.explanation);
+    var wordObj = {
+        word: word,
+        pos: cmd.pos,
+        explanation: cmd.explanation,
+        tag: cmd.tag,
+        sample: [],
+        note: []
+    };
+    backend_1.add(wordObj);
 });
 commander_1.default
     .command('delete <word> [otherWords...]')
