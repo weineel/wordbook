@@ -1,5 +1,8 @@
 {
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "version": "0.0.1",
   "description": "单词本",
   "repository": "https://github.com/weineel/wordbook.git",
