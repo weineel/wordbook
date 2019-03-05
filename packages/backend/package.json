@@ -4,7 +4,7 @@
   "description": "提供数据接口",
   "author": "weineel <LiJF_wn@163.com>",
   "homepage": "https://github.com/weineel/wordbook#readme",
-  "license": "ISC",
+  "license": "MIT",
   "main": "lib/backend.js",
   "types": "src/index.d.ts",
   "directories": {

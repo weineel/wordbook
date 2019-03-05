@@ -4,7 +4,7 @@
   "description": "命令行",
   "author": "weineel <LiJF_wn@163.com>",
   "homepage": "https://github.com/weineel/wordbook#readme",
-  "license": "ISC",
+  "license": "MIT",
   "bin": {
     "wordbook": "dist/index.js"
   },
