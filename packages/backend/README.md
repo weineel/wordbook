@@ -4,7 +4,7 @@
 
 ## Usage
 
-```js
+```javascript
 const backend = require('@wordbook/backend');
 
 backend.add(wordObj);  // 添加一个单词
