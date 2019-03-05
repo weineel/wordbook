@@ -6,7 +6,7 @@ import { add, Word } from '@wordbook/backend'
 
 program
   .version(require('../package.json').version, '-v, --version')
-  .option('-x, --xe <xee>', 'xxxxx')  // 根选项, 优先级比子命令高(同名时，子命令将不会被解析到)。
+  // .option('-x, --xe <xee>', 'xxxxx')  // 根选项, 优先级比子命令高(同名时，子命令将不会被解析到)。
   .usage('<command> [options]')  // 用法说明（BNF 范式指导），会在 --help 时显示。
 
 program
@@ -89,7 +89,7 @@ program
   .arguments('<command>')
   .action((cmd: any) => {
     program.outputHelp()
-    console.log(`  ` + chalk.red(`Unknown command ${chalk.yellow(cmd)}.`))
+    console.log(`  ` + chalk.red(`未知的命令 ${chalk.yellow(cmd)}.`))
     console.log()
   })
 
@@ -97,7 +97,7 @@ program
 program.on('--help', () => {
   // program.outputHelp()
   console.log()
-  console.log(`  Run ${chalk.cyan(`wordbook <command> --help`)} for detailed usage of given command.`)
+  console.log(`  使用 ${chalk.cyan(`wordbook <command> --help`)} 查看指定子命令的用法。`)
   console.log()
 })
 

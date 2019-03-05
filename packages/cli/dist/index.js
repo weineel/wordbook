@@ -9,7 +9,7 @@ var chalk_1 = __importDefault(require("chalk"));
 var backend_1 = require("@wordbook/backend");
 commander_1.default
     .version(require('../package.json').version, '-v, --version')
-    .option('-x, --xe <xee>', 'xxxxx') // 根选项, 优先级比子命令高(同名时，子命令将不会被解析到)。
+    // .option('-x, --xe <xee>', 'xxxxx')  // 根选项, 优先级比子命令高(同名时，子命令将不会被解析到)。
     .usage('<command> [options]'); // 用法说明（BNF 范式指导），会在 --help 时显示。
 commander_1.default
     .command('add <word>')
@@ -85,14 +85,14 @@ commander_1.default
     .arguments('<command>')
     .action(function (cmd) {
     commander_1.default.outputHelp();
-    console.log("  " + chalk_1.default.red("Unknown command " + chalk_1.default.yellow(cmd) + "."));
+    console.log("  " + chalk_1.default.red("\u672A\u77E5\u7684\u547D\u4EE4 " + chalk_1.default.yellow(cmd) + "."));
     console.log();
 });
 // add some useful info on help
 commander_1.default.on('--help', function () {
     // program.outputHelp()
     console.log();
-    console.log("  Run " + chalk_1.default.cyan("wordbook <command> --help") + " for detailed usage of given command.");
+    console.log("  \u4F7F\u7528 " + chalk_1.default.cyan("wordbook <command> --help") + " \u67E5\u770B\u6307\u5B9A\u5B50\u547D\u4EE4\u7684\u7528\u6CD5\u3002");
     console.log();
 });
 commander_1.default.commands.forEach(function (c) { return c.on('--help', function () { return console.log(); }); });
