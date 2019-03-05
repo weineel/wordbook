@@ -32,5 +32,6 @@
     "chalk": "^2.4.2",
     "commander": "^2.19.0",
     "ora": "^3.2.0"
-  }
+  },
+  "gitHead": "bf7ae64c1b2f6d34e5ba1df55324549d33143cc2"
 }
