@@ -17,10 +17,10 @@ export async function lp(p: Promise<Result<any>>, loadingMessage?: string): Prom
   spinner.start(loadingMessage || 'loading...')
   const result: Result<any> = await p
   try {
-    Result.parse(result)
+    const data = Result.parse(result)
     spinner.succeed(tintingForKeyword(result.message))
+    return data
   } catch (ex) {
     spinner.fail(chalk.red(tintingForKeyword(result.message)))
   }
-  return p
 }

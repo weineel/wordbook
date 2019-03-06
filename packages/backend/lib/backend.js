@@ -26,4 +26,29 @@ function add(word) {
     });
 }
 exports.add = add;
+function search(page) {
+    return new Promise(function (resolve, reject) {
+        database_1.default().all('select * from word', function (err, rows) {
+            if (err) {
+                resolve(common_1.Result.failure('failure: ' + err));
+            }
+            else {
+                var data = rows.map(function (e) { return ({
+                    word: e.word,
+                    pos: e.pos,
+                    explanation: e.explanation,
+                    tag: e.tag && e.tag.split(','),
+                    sample: [],
+                    note: []
+                }); });
+                resolve({
+                    code: 200,
+                    message: "\u83B7\u53D6\u6210\u529F",
+                    data: data
+                });
+            }
+        });
+    });
+}
+exports.search = search;
 //# sourceMappingURL=backend.js.map

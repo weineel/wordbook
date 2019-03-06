@@ -115,9 +115,21 @@ commander_1.default
     .option('-t, --tag [a][,b]*', '指定搜索的标签(精确匹配)，多个时使用 , 隔开。', list)
     .option('-p, --page <page>', '页码，从1开始')
     .option('-l, --length <length>', '每页的个数, 默认10')
-    .action(function (keyword, cmd) {
-    console.warn(keyword, cmd.page || 1, cmd.length || 10, cmd.word, cmd.explanation, cmd.sample, cmd.note);
-});
+    .action(function (keyword, cmd) { return __awaiter(_this, void 0, void 0, function () {
+    var _a, _b, _c, _d;
+    return __generator(this, function (_e) {
+        switch (_e.label) {
+            case 0:
+                console.warn(keyword, cmd.page || 1, cmd.length || 10, cmd.word, cmd.explanation, cmd.sample, cmd.note);
+                _b = (_a = console).log;
+                _d = (_c = JSON).stringify;
+                return [4 /*yield*/, utils_1.lp(backend_1.search())];
+            case 1:
+                _b.apply(_a, [_d.apply(_c, [_e.sent()])]);
+                return [2 /*return*/];
+        }
+    });
+}); });
 commander_1.default
     .command('tags')
     .description('标签管理')

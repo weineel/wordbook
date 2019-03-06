@@ -2,7 +2,7 @@
 
 import program from 'commander'
 import chalk from 'chalk'
-import { add } from '@wordbook/backend'
+import { add, search } from '@wordbook/backend'
 import { Word } from '@wordbook/common'
 import { lp } from './utils'
 
@@ -73,8 +73,9 @@ program
   .option('-t, --tag [a][,b]*', '指定搜索的标签(精确匹配)，多个时使用 , 隔开。', list)
   .option('-p, --page <page>', '页码，从1开始')
   .option('-l, --length <length>', '每页的个数, 默认10')
-  .action((keyword, cmd) => {
+  .action(async (keyword, cmd) => {
     console.warn(keyword, cmd.page || 1, cmd.length || 10, cmd.word, cmd.explanation, cmd.sample, cmd.note)
+    console.log(JSON.stringify(await lp(search())))
   })
 
 program

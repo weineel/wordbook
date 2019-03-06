@@ -23,3 +23,30 @@ export function add(word: Word): Promise<Result<void>> {
     )
   })
 }
+
+export function search(page?: any): Promise<Result<Word[]>> {
+  return new Promise((resolve, reject) => {
+    db().all(
+      'select * from word',
+      function(err: any, rows: []) {
+        if (err) {
+          resolve(Result.failure('failure: ' + err))
+        } else {
+          const data: Word[] = rows.map((e: any) => ({
+            word: e.word,
+            pos: e.pos,
+            explanation: e.explanation,
+            tag: e.tag && e.tag.split(','),  // 数据库中是逗号隔开的字符串
+            sample: [],
+            note: []
+          }))
+          resolve({
+            code: 200,
+            message: `获取成功`,
+            data
+          })
+        }
+      }
+    )
+  })
+}

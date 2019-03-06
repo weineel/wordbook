@@ -52,7 +52,7 @@ function tintingForKeyword(message) {
  */
 function lp(p, loadingMessage) {
     return __awaiter(this, void 0, void 0, function () {
-        var result;
+        var result, data;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -61,13 +61,14 @@ function lp(p, loadingMessage) {
                 case 1:
                     result = _a.sent();
                     try {
-                        common_1.Result.parse(result);
+                        data = common_1.Result.parse(result);
                         spinner.succeed(tintingForKeyword(result.message));
+                        return [2 /*return*/, data];
                     }
                     catch (ex) {
                         spinner.fail(chalk_1.default.red(tintingForKeyword(result.message)));
                     }
-                    return [2 /*return*/, p];
+                    return [2 /*return*/];
             }
         });
     });
