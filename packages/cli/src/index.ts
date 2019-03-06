@@ -3,6 +3,9 @@
 import program from 'commander'
 import chalk from 'chalk'
 import { add, Word } from '@wordbook/backend'
+import ora from 'ora'
+
+const spinner = ora()
 
 program
   .version(require('../package.json').version, '-v, --version')
@@ -17,7 +20,8 @@ program
   .option('-s, --sample <sample>', '例句。')
   .option('-n, --note <note>', '笔记。')
   .option('-t, --tag <a>[,b]*', '标签，多个时使用 , 隔开。', list)
-  .action((word, cmd) => {
+  .action(async (word, cmd) => {
+    spinner.start('adding... \n')
     console.warn(word, cmd.pos, cmd.explanation)
     const wordObj: Word = {
       word,
@@ -27,7 +31,8 @@ program
       sample: [],
       note: []
     }
-    add(wordObj)
+    await add(wordObj)
+    spinner.stop()
   })
   
 program
