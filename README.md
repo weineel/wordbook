@@ -1,10 +1,37 @@
 # wordbook
 
-单词本
+单词本命令行工具
 
 ## Install
 
+```shell
+npm install -g @wordbook/cli
+# or
+yarn global add @wordbook/cli
+```
+
 ## Usage
+
+1. 设置别名（可选），在 `~/.zshrc`或`~/.bashrc`中添加一行 `alias wb='wordbook'`。
+
+2. 使用示例：添加一个单词 weineel, 词性设置为: n(名词), 解释设置为: 微溺, 标签设置为: name 和 author。
+
+```shell
+wordbook add -p n -e 微溺 -t name,author weineel
+# or 如果设置了别名
+wb add -p n -e 微溺 -t name,author weineel
+```
+
+3. 查看帮助
+
+```shell
+# 查看 wordbook 的详细用法
+wordbook --help
+
+# 查看 add 子命令的详细用法, 也可用同样的格式查看其它子命令的用法。
+wordbook add --help
+```
+
 
 ## Feature & Plan
 
@@ -52,3 +79,13 @@
 
 * [ ] `-l, --list`  列出所有标签
 
+
+### 7. `ui [options]`  打开webapp。
+
+* [ ] `-p, --port`  设置端口
+
+### 8. 交互式命令行（参考commitizen）。
+
+* [ ] 单选
+* [ ] 多选
+* [ ] 输入文本
