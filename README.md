@@ -20,6 +20,9 @@ yarn global add @wordbook/cli
 wordbook add -p n -e 微溺 -t name,author weineel
 # or 如果设置了别名
 wb add -p n -e 微溺 -t name,author weineel
+
+# 查看添加的结果
+wordbook search
 ```
 
 3. 查看帮助
