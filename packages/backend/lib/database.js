@@ -21,7 +21,7 @@ function mkdirsSync(dirname) {
         }
     }
 }
-console.log(mkdirsSync(dbPath));
+mkdirsSync(dbPath);
 if (!fs_1.default.existsSync(dbPathFile)) {
     fs_1.default.copyFileSync(path_1.default.resolve(__dirname, '..', 'db-base.sqlite'), dbPathFile);
 }

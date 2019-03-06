@@ -2,10 +2,9 @@
 
 import program from 'commander'
 import chalk from 'chalk'
-import { add, Word } from '@wordbook/backend'
-import ora from 'ora'
-
-const spinner = ora()
+import { add } from '@wordbook/backend'
+import { Word } from '@wordbook/common'
+import { lp } from './utils'
 
 program
   .version(require('../package.json').version, '-v, --version')
@@ -21,8 +20,6 @@ program
   .option('-n, --note <note>', '笔记。')
   .option('-t, --tag <a>[,b]*', '标签，多个时使用 , 隔开。', list)
   .action(async (word, cmd) => {
-    spinner.start('adding... \n')
-    console.warn(word, cmd.pos, cmd.explanation)
     const wordObj: Word = {
       word,
       pos: cmd.pos,
@@ -31,8 +28,7 @@ program
       sample: [],
       note: []
     }
-    await add(wordObj)
-    spinner.stop()
+    await lp(add(wordObj))
   })
   
 program

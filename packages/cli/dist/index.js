@@ -43,8 +43,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var commander_1 = __importDefault(require("commander"));
 var chalk_1 = __importDefault(require("chalk"));
 var backend_1 = require("@wordbook/backend");
-var ora_1 = __importDefault(require("ora"));
-var spinner = ora_1.default();
+var utils_1 = require("./utils");
 commander_1.default
     .version(require('../package.json').version, '-v, --version')
     // .option('-x, --xe <xee>', 'xxxxx')  // 根选项, 优先级比子命令高(同名时，子命令将不会被解析到)。
@@ -62,8 +61,6 @@ commander_1.default
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                spinner.start('adding... \n');
-                console.warn(word, cmd.pos, cmd.explanation);
                 wordObj = {
                     word: word,
                     pos: cmd.pos,
@@ -72,10 +69,9 @@ commander_1.default
                     sample: [],
                     note: []
                 };
-                return [4 /*yield*/, backend_1.add(wordObj)];
+                return [4 /*yield*/, utils_1.lp(backend_1.add(wordObj))];
             case 1:
                 _a.sent();
-                spinner.stop();
                 return [2 /*return*/];
         }
     });

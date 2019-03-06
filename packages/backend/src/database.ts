@@ -18,7 +18,7 @@ function mkdirsSync(dirname: string) {
   }
 }
 
-console.log(mkdirsSync(dbPath))
+mkdirsSync(dbPath)
 
 if (!fs.existsSync(dbPathFile)) {
   fs.copyFileSync(path.resolve(__dirname, '..', 'db-base.sqlite'), dbPathFile)

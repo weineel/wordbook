@@ -1,13 +1,12 @@
 {
-  "name": "@wordbook/cli",
+  "name": "@wordbook/common",
   "version": "0.0.1-alpha.7",
-  "description": "单词本命令行",
+  "description": "通用依赖",
   "author": "weineel <LiJF_wn@163.com>",
   "homepage": "https://github.com/weineel/wordbook#readme",
   "license": "MIT",
-  "bin": {
-    "wordbook": "dist/index.js"
-  },
+  "main": "lib/common.js",
+  "types": "src/common.d.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -26,13 +25,5 @@
   },
   "bugs": {
     "url": "https://github.com/weineel/wordbook/issues"
-  },
-  "dependencies": {
-    "@wordbook/common": "^0.0.1-alpha.7",
-    "@wordbook/backend": "^0.0.1-alpha.7",
-    "chalk": "^2.4.2",
-    "commander": "^2.19.0",
-    "ora": "^3.2.0"
-  },
-  "gitHead": "bf7ae64c1b2f6d34e5ba1df55324549d33143cc2"
+  }
 }

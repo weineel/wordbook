@@ -27,6 +27,8 @@
     "url": "https://github.com/weineel/wordbook/issues"
   },
   "dependencies": {
+    "@wordbook/common": "^0.0.1-alpha.7",
+    "debug": "^4.1.1",
     "sqlite3": "^4.0.6"
   },
   "gitHead": "bf7ae64c1b2f6d34e5ba1df55324549d33143cc2"
