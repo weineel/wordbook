@@ -64,7 +64,7 @@ program
   })
 
 program
-  .command('search <keyword>')
+  .command('search [keyword]')
   .description('模糊搜索单词，默认搜索 word、explanation 字段')
   .option('-w, --no-word', '不搜索 word 字段。')
   .option('-e, --no-explanation', '不搜索解释字段。')

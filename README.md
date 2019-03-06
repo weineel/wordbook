@@ -65,7 +65,7 @@ wordbook add --help
 
 * [ ] 显示单词信息
 
-### 5. `search [options] <keyword>`     模糊搜索单词，默认搜索 word、explanation 字段
+### 5. `search [options] [keyword]`     模糊搜索单词，默认搜索 word、explanation 字段
 
 * [ ] -w, --no-word          不搜索 word 字段。
 * [ ] -e, --no-explanation   不搜索解释字段。
