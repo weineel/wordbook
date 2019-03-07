@@ -7,13 +7,28 @@ export declare interface Word {
   note: string[]
 }
 
+export declare enum ErrorCode {
+  Success,
+  Failure,
+  // 单词已存在
+  Exist,
+  // 单词不存在
+  NotExist,
+}
+
+export declare class ResultError extends Error {
+  code: ErrorCode
+}
+
 export declare class Result<T> {
-  code: number
+  code: ErrorCode
   message: string
   data?: T
 
-  constructor(code: number, message: string, data?: T)
+  constructor(code: ErrorCode, message: string, data?: T)
   static success(message?: string, data?: any) : Result<any>
   static failure(message?: string, data?: any) : Result<any>
+  static failureExist(word?: string, data?: any): Result<any>
+  static failureNotExist(word?: string, data?: any): Result<any>
   static parse(result: Result<any>): any
 }

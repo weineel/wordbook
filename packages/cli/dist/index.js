@@ -43,6 +43,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var commander_1 = __importDefault(require("commander"));
 var chalk_1 = __importDefault(require("chalk"));
 var backend_1 = require("@wordbook/backend");
+var common_1 = require("@wordbook/common");
 var utils_1 = require("./utils");
 commander_1.default
     .version(require('../package.json').version, '-v, --version')
@@ -57,22 +58,30 @@ commander_1.default
     .option('-n, --note <note>', '笔记。')
     .option('-t, --tag <a>[,b]*', '标签，多个时使用 , 隔开。', list)
     .action(function (word, cmd) { return __awaiter(_this, void 0, void 0, function () {
-    var wordObj;
+    var wordObj, ex_1, recommendCmd;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                wordObj = {
-                    word: word,
-                    pos: cmd.pos,
-                    explanation: cmd.explanation,
-                    tag: cmd.tag,
-                    sample: [],
-                    note: []
-                };
-                return [4 /*yield*/, utils_1.lp(backend_1.add(wordObj))];
+                wordObj = utils_1.cmd2wordObj(word, cmd);
+                _a.label = 1;
             case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, utils_1.lp(backend_1.add(wordObj))];
+            case 2:
                 _a.sent();
-                return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 3:
+                ex_1 = _a.sent();
+                if (ex_1.code === common_1.ErrorCode.Exist) {
+                    recommendCmd = "wordbook modify " + word;
+                    console.log();
+                    console.log("\u5EFA\u8BAE\u4F7F\u7528\uFF1A" + chalk_1.default.yellow(recommendCmd) + " \u547D\u4EE4\u8FDB\u884C\u4FEE\u6539");
+                }
+                else {
+                    console.error(ex_1);
+                }
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); });
@@ -110,19 +119,30 @@ commander_1.default
     .command('show <word>')
     .description('显示单词的详情')
     .action(function (word, cmd) { return __awaiter(_this, void 0, void 0, function () {
-    var wordObj;
+    var wordObj, ex_2, recommendCmd;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, utils_1.lp(backend_1.getByWord(word))
-                // 单词可能不存在
-            ];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, utils_1.lp(backend_1.getByWord(word))];
             case 1:
                 wordObj = _a.sent();
-                // 单词可能不存在
-                if (wordObj) {
+                if (wordObj)
                     utils_1.printTintingWrod(wordObj);
+                return [3 /*break*/, 3];
+            case 2:
+                ex_2 = _a.sent();
+                // 单词可能不存在
+                if (ex_2.code === common_1.ErrorCode.NotExist) {
+                    recommendCmd = "wordbook add " + word;
+                    console.log();
+                    console.log("\u5EFA\u8BAE\u4F7F\u7528\uFF1A" + chalk_1.default.yellow(recommendCmd) + " \u547D\u4EE4\u8FDB\u884C\u6DFB\u52A0");
                 }
-                return [2 /*return*/];
+                else {
+                    console.error(ex_2);
+                }
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); });

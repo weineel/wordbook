@@ -47,6 +47,17 @@ var spinner = ora_1.default();
 function tintingForKeyword(message) {
     return message.replace(/【.*?】/g, function (m) { return chalk_1.default.yellow(m); });
 }
+function cmd2wordObj(word, cmd) {
+    return {
+        word: word,
+        pos: cmd.pos || [],
+        explanation: cmd.explanation,
+        tag: cmd.tag || [],
+        sample: [],
+        note: []
+    };
+}
+exports.cmd2wordObj = cmd2wordObj;
 /**
  * 等待 异步接口, 默认操作
  */
@@ -67,6 +78,7 @@ function lp(p, loadingMessage) {
                     }
                     catch (ex) {
                         spinner.fail(chalk_1.default.red(tintingForKeyword(result.message)));
+                        throw ex;
                     }
                     return [2 /*return*/];
             }

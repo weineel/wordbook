@@ -19,6 +19,17 @@ function tintingForKeyword(message: string): string {
   return message.replace(/【.*?】/g, m => chalk.yellow(m))
 }
 
+export function cmd2wordObj(word: string, cmd: any): Word {
+  return {
+    word,
+    pos: cmd.pos || [],
+    explanation: cmd.explanation,
+    tag: cmd.tag || [],
+    sample: [],
+    note: []
+  }
+}
+
 /**
  * 等待 异步接口, 默认操作
  */
@@ -31,6 +42,7 @@ export async function lp(p: Promise<Result<any>>, loadingMessage?: string): Prom
     return data
   } catch (ex) {
     spinner.fail(chalk.red(tintingForKeyword(result.message)))
+    throw ex
   }
 }
 

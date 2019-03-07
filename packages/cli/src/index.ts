@@ -3,8 +3,8 @@
 import program from 'commander'
 import chalk from 'chalk'
 import { add, search, getByWord, deleteByWords } from '@wordbook/backend'
-import { Word } from '@wordbook/common'
-import { lp, printTintingWrod } from './utils'
+import { Word, ErrorCode } from '@wordbook/common'
+import { lp, printTintingWrod, cmd2wordObj } from './utils'
 
 program
   .version(require('../package.json').version, '-v, --version')
@@ -20,15 +20,18 @@ program
   .option('-n, --note <note>', '笔记。')
   .option('-t, --tag <a>[,b]*', '标签，多个时使用 , 隔开。', list)
   .action(async (word, cmd) => {
-    const wordObj: Word = {
-      word,
-      pos: cmd.pos,
-      explanation: cmd.explanation,
-      tag: cmd.tag,
-      sample: [],
-      note: []
+    const wordObj: Word = cmd2wordObj(word, cmd)
+    try {
+      await lp(add(wordObj))
+    } catch (ex) {
+      if (ex.code === ErrorCode.Exist) {
+        const recommendCmd = `wordbook modify ${word}`
+        console.log()
+        console.log(`建议使用：${chalk.yellow(recommendCmd)} 命令进行修改`)
+      } else {
+        console.error(ex)
+      }
     }
-    await lp(add(wordObj))
   })
   
 program
@@ -60,10 +63,18 @@ program
   .command('show <word>')
   .description('显示单词的详情')
   .action(async(word, cmd) => {
-    const wordObj: Word = await lp(getByWord(word))
-    // 单词可能不存在
-    if (wordObj) {
-      printTintingWrod(wordObj)
+    try {
+      const wordObj: Word = await lp(getByWord(word))
+      if (wordObj) printTintingWrod(wordObj)
+    } catch (ex) {
+      // 单词可能不存在
+      if (ex.code === ErrorCode.NotExist) {
+        const recommendCmd = `wordbook add ${word}`
+        console.log()
+        console.log(`建议使用：${chalk.yellow(recommendCmd)} 命令进行添加`)
+      } else {
+        console.error(ex)
+      }
     }
   })
 

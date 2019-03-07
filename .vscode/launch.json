@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "june",
       "program": "${workspaceFolder}/packages/cli/dist/index.js",
-      "args": ["add", "-p", "n", "-e", "月儿", "-t", "name,wife", "june3"],
+      "args": ["add", "-p", "n", "-e", "月儿", "june4"],
       "outFiles": [
         "${workspaceFolder}/**/*.js"
       ]

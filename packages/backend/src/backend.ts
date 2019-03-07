@@ -11,7 +11,7 @@ export function add(word: Word): Promise<Result<void>> {
       function(err: any) {
         if (err) {
           if (err.code === 'SQLITE_CONSTRAINT') {
-            resolve(Result.failure(`【${word.word}】已经存在，不能重复添加！`))
+            resolve(Result.failureExist(word.word))
           } else {
             resolve(Result.failure('failure: ' + err))
           }
@@ -38,7 +38,7 @@ export function getByWord(word: string): Promise<Result<Word>> {
             const data: Word = rows2word(row)
             resolve(Result.success('获取成功', data))
           } else {
-            resolve(Result.failure(`单词【${word}】不存在`))
+            resolve(Result.failureNotExist(word))
           }
         }
       }
