@@ -70,13 +70,13 @@ wordbook add --help
 
 ### 5. `search [options] [keyword]`     模糊搜索单词，默认搜索 word、explanation 字段
 
-* [ ] -w, --no-word          不搜索 word 字段。
-* [ ] -e, --no-explanation   不搜索解释字段。
-* [ ] -s, --sample           搜索例句字段。
-* [ ] -n, --note             搜索笔记字段。
-* [ ] -t, --tag `[a][,b]*`     指定搜索的标签(精确匹配)，多个时使用 , 隔开。
-* [ ] -p, --page `<page>`      页码，从1开始
-* [ ] -l, --length `<length>`  每页的个数, 默认10
+* [ ] `-w, --no-word`          不搜索 word 字段。
+* [ ] `-e, --no-explanation`   不搜索解释字段。
+* [ ] `-s, --sample`           搜索例句字段。
+* [ ] `-n, --note`             搜索笔记字段。
+* [ ] `-t, --tag [a][,b]*`     指定搜索的标签(精确匹配)，多个时使用 , 隔开。
+* [ ] `-p, --page <page>`      页码，从1开始
+* [ ] `-l, --length <length>`  每页的个数, 默认10
 
 ### 6. `tags [options]`                 标签管理
 
@@ -87,8 +87,13 @@ wordbook add --help
 
 * [ ] `-p, --port`  设置端口
 
-### 8. 交互式命令行（参考commitizen）。
+### 8. 交互式命令行（参考commitizen）或使用 Inquirer.js。
 
 * [ ] 单选
 * [ ] 多选
 * [ ] 输入文本
+
+### 9. `review [options]` 复习。（blessed 和 blessed-contrib）。
+
+* [ ] `-n, --number <number>`  指定复习的个数
+* [ ] `-o, --overview`  查看复习概况图表
