@@ -49,20 +49,19 @@ wordbook add --help
 
 ### 2. `delete <word> [otherWords...]`  删除单词
 
-* [ ] 删除指定单词
+* [ ] 删除指定单词, 注意需要级联删除。
 
 ### 3. `modify [options] <word>`        修改一个单词
 
-* [ ] `-p, --pos <a>[,b]*`                        修改词性，多个时使用 , 隔开。
+* [ ] `-p, --pos <a>[,b]*`                         修改词性，多个时使用 , 隔开。
 * [ ] `-e, --explanation <explanation>`            修改解释。
 * [ ] `-t, --tag <a>[,b]*`                         修改标签，多个时使用 , 隔开。
-* [ ] `-s, --nth-sample [nthSample][,nthSample]*`  要操作的例句下标。
-* [ ] `-n, --nth-note [nthNote][,nthNote]*`        要操作的笔记下标。
-* [ ] `--add-sample <smaple>`                      添加例句。
-* [ ] `--add-note <note>`                          添加笔记。
-* [ ] `--delete`                                   删除例句或笔记。
-* [ ] `--sample <sample>`                          要修改成的例句内容。
-* [ ] `--note <note>`                              要修改成的笔记内容。
+* [ ] `--ns [nthSample][,nthSample]*`              要操作的例句下标。
+* [ ] `--nn [nthNote][,nthNote]*`                  要操作的笔记下标。
+* [ ] `-a, --add`                                  添加例句或笔记。
+* [ ] `-d, --delete`                               删除例句或笔记。
+* [ ] `-s, --sample <sample>`                      要修改成的例句内容。
+* [ ] `-n, --note <note>`                          要修改成的笔记内容。
 
 ### 4. `show <word>`                    显示单词的详情
 
