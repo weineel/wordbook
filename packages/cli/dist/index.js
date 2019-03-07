@@ -79,9 +79,16 @@ commander_1.default
 commander_1.default
     .command('delete <word> [otherWords...]')
     .description('删除单词')
-    .action(function (word, otherWords, cmd) {
-    console.warn(word, otherWords, [word].concat(otherWords));
-});
+    .action(function (word, otherWords, cmd) { return __awaiter(_this, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, utils_1.lp(backend_1.deleteByWords([word].concat(otherWords)))];
+            case 1:
+                _a.sent();
+                return [2 /*return*/];
+        }
+    });
+}); });
 commander_1.default
     .command('modify <word>')
     .description('修改一个单词')
@@ -106,10 +113,15 @@ commander_1.default
     var wordObj;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, utils_1.lp(backend_1.getByWord(word))];
+            case 0: return [4 /*yield*/, utils_1.lp(backend_1.getByWord(word))
+                // 单词可能不存在
+            ];
             case 1:
                 wordObj = _a.sent();
-                utils_1.printTintingWrod(wordObj);
+                // 单词可能不存在
+                if (wordObj) {
+                    utils_1.printTintingWrod(wordObj);
+                }
                 return [2 /*return*/];
         }
     });

@@ -40,16 +40,16 @@ wordbook add --help
 
 ### 1. `add [options] <word>` 添加一个单词，不能添加已经存在的单词。
 
-* [ ] `-p, --pos <a>[,b]*`               Part of speech，词性。多个时使用 , 隔开。
-* [ ] `-e, --explanation <explanation>`  解释。
+* [x] `-p, --pos <a>[,b]*`               Part of speech，词性。多个时使用 , 隔开。
+* [x] `-e, --explanation <explanation>`  解释。
 * [ ] `-s, --sample <sample>`            例句。
 * [ ] `-n, --note <note>`                笔记。
-* [ ] `-t, --tag <a>[,b]*`               标签，多个时使用 , 隔开。
+* [x] `-t, --tag <a>[,b]*`               标签，多个时使用 , 隔开。
 
 
 ### 2. `delete <word> [otherWords...]`  删除单词
 
-* [ ] 删除指定单词, 注意需要级联删除。
+* [x] 删除指定单词, 注意需要级联删除。
 
 ### 3. `modify [options] <word>`        修改一个单词
 
@@ -65,7 +65,7 @@ wordbook add --help
 
 ### 4. `show <word>`                    显示单词的详情
 
-* [ ] 显示单词信息
+* [x] 显示单词信息
 
 ### 5. `search [options] [keyword]`     模糊搜索单词，默认搜索 word、explanation 字段
 

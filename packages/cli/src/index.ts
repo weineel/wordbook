@@ -2,7 +2,7 @@
 
 import program from 'commander'
 import chalk from 'chalk'
-import { add, search, getByWord } from '@wordbook/backend'
+import { add, search, getByWord, deleteByWords } from '@wordbook/backend'
 import { Word } from '@wordbook/common'
 import { lp, printTintingWrod } from './utils'
 
@@ -34,8 +34,8 @@ program
 program
   .command('delete <word> [otherWords...]')
   .description('删除单词')
-  .action((word, otherWords, cmd) => {
-    console.warn(word, otherWords, [word, ...otherWords])
+  .action(async (word, otherWords, cmd) => {
+    await lp(deleteByWords([word, ...otherWords]))
   })
 
 program
@@ -61,7 +61,10 @@ program
   .description('显示单词的详情')
   .action(async(word, cmd) => {
     const wordObj: Word = await lp(getByWord(word))
-    printTintingWrod(wordObj)
+    // 单词可能不存在
+    if (wordObj) {
+      printTintingWrod(wordObj)
+    }
   })
 
 program
