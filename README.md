@@ -22,7 +22,7 @@ wordbook add -p n -e 微溺 -t name,author weineel
 wb add -p n -e 微溺 -t name,author weineel
 
 # 查看添加的结果
-wordbook search
+wordbook show weineel
 ```
 
 3. 查看帮助

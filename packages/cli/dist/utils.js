@@ -74,4 +74,30 @@ function lp(p, loadingMessage) {
     });
 }
 exports.lp = lp;
+/**
+ * 打印单词
+ * @param word 要输出的单词
+ * @param options 输出参数
+ */
+function printTintingWrod(word, options) {
+    if (options === void 0) { options = {
+        pos: true,
+        explanation: true,
+        tag: true
+    }; }
+    console.log();
+    var str = "\uD83D\uDEA9 " + chalk_1.default.blueBright(word.word);
+    if (options.pos) {
+        str += " " + word.pos + ".";
+    }
+    if (options.explanation) {
+        str += " " + chalk_1.default.yellow(word.explanation) + "\n";
+    }
+    if (options.tag) {
+        str += chalk_1.default.grey('标签:') + " " + word.tag.join(' ');
+    }
+    console.log(str);
+    console.log();
+}
+exports.printTintingWrod = printTintingWrod;
 //# sourceMappingURL=utils.js.map

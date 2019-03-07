@@ -1,5 +1,6 @@
 import db from './database'
 import { Word, Result } from '@wordbook/common'
+import { rows2word } from './utils'
 
 export function add(word: Word): Promise<Result<void>> {
   return new Promise((resolve, reject) => {
@@ -24,6 +25,27 @@ export function add(word: Word): Promise<Result<void>> {
   })
 }
 
+export function getByWord(word: string): Promise<Result<Word>> {
+  return new Promise((resolve, reject) => {
+    db().get(
+      'select * from word where word = ?',
+      word,
+      function(err: any, row: any) {
+        if (err) {
+          resolve(Result.failure('failure: ' + err))
+        } else {
+          const data: Word = rows2word(row)
+          resolve({
+            code: 200,
+            message: `获取成功`,
+            data
+          })
+        }
+      }
+    )
+  })
+}
+
 export function search(page?: any): Promise<Result<Word[]>> {
   return new Promise((resolve, reject) => {
     db().all(
@@ -32,14 +54,7 @@ export function search(page?: any): Promise<Result<Word[]>> {
         if (err) {
           resolve(Result.failure('failure: ' + err))
         } else {
-          const data: Word[] = rows.map((e: any) => ({
-            word: e.word,
-            pos: e.pos,
-            explanation: e.explanation,
-            tag: e.tag && e.tag.split(','),  // 数据库中是逗号隔开的字符串
-            sample: [],
-            note: []
-          }))
+          const data: Word[] = rows.map((e: any) => rows2word(e))
           resolve({
             code: 200,
             message: `获取成功`,

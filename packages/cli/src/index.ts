@@ -2,9 +2,9 @@
 
 import program from 'commander'
 import chalk from 'chalk'
-import { add, search } from '@wordbook/backend'
+import { add, search, getByWord } from '@wordbook/backend'
 import { Word } from '@wordbook/common'
-import { lp } from './utils'
+import { lp, printTintingWrod } from './utils'
 
 program
   .version(require('../package.json').version, '-v, --version')
@@ -59,8 +59,9 @@ program
 program
   .command('show <word>')
   .description('显示单词的详情')
-  .action((word, cmd) => {
-    console.warn(word)
+  .action(async(word, cmd) => {
+    const wordObj: Word = await lp(getByWord(word))
+    printTintingWrod(wordObj)
   })
 
 program

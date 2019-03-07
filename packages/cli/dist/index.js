@@ -102,9 +102,18 @@ commander_1.default
 commander_1.default
     .command('show <word>')
     .description('显示单词的详情')
-    .action(function (word, cmd) {
-    console.warn(word);
-});
+    .action(function (word, cmd) { return __awaiter(_this, void 0, void 0, function () {
+    var wordObj;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, utils_1.lp(backend_1.getByWord(word))];
+            case 1:
+                wordObj = _a.sent();
+                utils_1.printTintingWrod(wordObj);
+                return [2 /*return*/];
+        }
+    });
+}); });
 commander_1.default
     .command('search [keyword]')
     .description('模糊搜索单词，默认搜索 word、explanation 字段')
