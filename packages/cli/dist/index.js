@@ -58,22 +58,22 @@ commander_1.default
     .option('-n, --note <note>', '笔记。')
     .option('-t, --tag <a>[,b]*', '标签，多个时使用 , 隔开。', list)
     .action(function (word, cmd) { return __awaiter(_this, void 0, void 0, function () {
-    var wordObj, ex_1, recommendCmd;
+    var inputWord, ex_1, recommendCmd;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                wordObj = utils_1.cmd2wordObj(word, cmd);
+                inputWord = utils_1.cmd2wordObj(word, cmd);
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, 4, 5]);
-                return [4 /*yield*/, utils_1.lp(backend_1.add(wordObj))];
+                return [4 /*yield*/, utils_1.lp(backend_1.add(inputWord))];
             case 2:
                 _a.sent();
                 return [3 /*break*/, 5];
             case 3:
                 ex_1 = _a.sent();
                 if (ex_1.code === common_1.ErrorCode.Exist) {
-                    recommendCmd = "wordbook modify " + word;
+                    recommendCmd = utils_1.modifyRecommendCmd(inputWord);
                     console.log();
                     console.log("\u5EFA\u8BAE\u4F7F\u7528\uFF1A" + chalk_1.default.yellow(recommendCmd) + " \u547D\u4EE4\u8FDB\u884C\u4FEE\u6539");
                 }
@@ -126,15 +126,17 @@ commander_1.default
     .option('-s, --sample <sample>', '要修改成的例句内容。')
     .option('-n, --note <note>', '要修改成的笔记内容。')
     .action(function (word, cmd) { return __awaiter(_this, void 0, void 0, function () {
-    var wordObj, inputWord, ex_3, recommendCmd;
+    var inputWord, wordObj, ex_3, recommendCmd;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 3, 4, 5]);
-                return [4 /*yield*/, utils_1.lp(backend_1.getByWord(word))];
-            case 1:
-                wordObj = _a.sent();
                 inputWord = utils_1.cmd2wordObj(word, cmd);
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 4, 5, 6]);
+                return [4 /*yield*/, utils_1.lpPure(backend_1.getByWord(word))];
+            case 2:
+                wordObj = _a.sent();
                 if (inputWord.pos.length) {
                     wordObj.pos = inputWord.pos;
                 }
@@ -145,25 +147,25 @@ commander_1.default
                     wordObj.explanation = inputWord.explanation;
                 }
                 return [4 /*yield*/, utils_1.lp(backend_1.updateByWord(wordObj))];
-            case 2:
-                _a.sent();
-                return [3 /*break*/, 5];
             case 3:
+                _a.sent();
+                return [3 /*break*/, 6];
+            case 4:
                 ex_3 = _a.sent();
                 // 单词可能不存在
                 if (ex_3.code === common_1.ErrorCode.NotExist) {
-                    recommendCmd = "wordbook add " + word;
+                    recommendCmd = utils_1.addRecommendCmd(inputWord);
                     console.log();
                     console.log("\u5EFA\u8BAE\u4F7F\u7528\uFF1A" + chalk_1.default.yellow(recommendCmd) + " \u547D\u4EE4\u8FDB\u884C\u6DFB\u52A0");
                 }
                 else {
                     console.error(ex_3);
                 }
-                return [3 /*break*/, 5];
-            case 4:
+                return [3 /*break*/, 6];
+            case 5:
                 backend_1.close();
                 return [7 /*endfinally*/];
-            case 5: return [2 /*return*/];
+            case 6: return [2 /*return*/];
         }
     });
 }); });

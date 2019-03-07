@@ -46,6 +46,46 @@ export async function lp(p: Promise<Result<any>>, loadingMessage?: string): Prom
   }
 }
 
+export async function lpPure(p: Promise<Result<any>>): Promise<any | undefined> {
+  const result: Result<any> = await p
+  try {
+    return Result.parse(result)
+  } catch (ex) {
+    throw ex
+  }
+}
+
+function buildCmdOption(word: Word): string {
+  let cmdOption = ''
+
+  if (word.pos.length) {
+    cmdOption += ` -p ${word.pos.join(',')}`
+  }
+  if (word.explanation) {
+    cmdOption += ` -e ${word.explanation}`
+  }
+  if (word.tag.length) {
+    cmdOption += ` -t ${word.tag.join(',')}`
+  }
+  return cmdOption
+}
+
+/**
+ * 对象转换为 add 命令行
+ * @param word 单词对象
+ */
+export function addRecommendCmd(word: Word): string {
+  return `wordbook add${buildCmdOption(word)} ${word.word}`
+}
+
+/**
+ * 对象转换为 modify 命令行
+ * @param word 单词对象
+ */
+export function modifyRecommendCmd(word: Word): string {
+  return `wordbook modify${buildCmdOption(word)} ${word.word}`
+}
+
 /**
  * 打印单词
  * @param word 要输出的单词

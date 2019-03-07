@@ -53,12 +53,12 @@ wordbook add --help
 
 ### 3. `modify [options] <word>`        修改一个单词
 
-* [ ] `-p, --pos <a>[,b]*`                         修改词性，多个时使用 , 隔开。
-* [ ] `-e, --explanation <explanation>`            修改解释。
-* [ ] `-t, --tag <a>[,b]*`                         修改标签，多个时使用 , 隔开。
+* [x] `-p, --pos <a>[,b]*`                         修改词性，多个时使用 , 隔开。
+* [x] `-e, --explanation <explanation>`            修改解释。
+* [x] `-t, --tag <a>[,b]*`                         修改标签，多个时使用 , 隔开。
 * [ ] `--ns [nthSample][,nthSample]*`              要操作的例句下标。
 * [ ] `--nn [nthNote][,nthNote]*`                  要操作的笔记下标。
-* [ ] `-a, --add`                                  添加例句或笔记。
+* [ ] `-a, --add`                                  添加例句或笔记, 默认为true。
 * [ ] `-d, --delete`                               删除例句或笔记。
 * [ ] `-s, --sample <sample>`                      要修改成的例句内容。
 * [ ] `-n, --note <note>`                          要修改成的笔记内容。

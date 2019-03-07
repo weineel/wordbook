@@ -4,7 +4,7 @@ import program from 'commander'
 import chalk from 'chalk'
 import { close, add, search, getByWord, deleteByWords, updateByWord } from '@wordbook/backend'
 import { Word, ErrorCode } from '@wordbook/common'
-import { lp, printTintingWrod, cmd2wordObj } from './utils'
+import { lp, lpPure, printTintingWrod, cmd2wordObj, addRecommendCmd, modifyRecommendCmd } from './utils'
 
 program
   .version(require('../package.json').version, '-v, --version')
@@ -20,12 +20,12 @@ program
   .option('-n, --note <note>', '笔记。')
   .option('-t, --tag <a>[,b]*', '标签，多个时使用 , 隔开。', list)
   .action(async (word, cmd) => {
-    const wordObj: Word = cmd2wordObj(word, cmd)
+    const inputWord: Word = cmd2wordObj(word, cmd)
     try {
-      await lp(add(wordObj))
+      await lp(add(inputWord))
     } catch (ex) {
       if (ex.code === ErrorCode.Exist) {
-        const recommendCmd = `wordbook modify ${word}`
+        const recommendCmd = modifyRecommendCmd(inputWord)
         console.log()
         console.log(`建议使用：${chalk.yellow(recommendCmd)} 命令进行修改`)
       } else {
@@ -63,9 +63,9 @@ program
   .option('-s, --sample <sample>', '要修改成的例句内容。')
   .option('-n, --note <note>', '要修改成的笔记内容。')
   .action(async (word, cmd) => {
+    const inputWord = cmd2wordObj(word, cmd)
     try {
-      const wordObj: Word = await lp(getByWord(word))
-      const inputWord = cmd2wordObj(word, cmd)
+      const wordObj: Word = await lpPure(getByWord(word))
       if (inputWord.pos.length) {
         wordObj.pos = inputWord.pos
       }
@@ -79,7 +79,7 @@ program
     } catch (ex) {
       // 单词可能不存在
       if (ex.code === ErrorCode.NotExist) {
-        const recommendCmd = `wordbook add ${word}`
+        const recommendCmd = addRecommendCmd(inputWord)
         console.log()
         console.log(`建议使用：${chalk.yellow(recommendCmd)} 命令进行添加`)
       } else {

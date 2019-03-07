@@ -86,6 +86,55 @@ function lp(p, loadingMessage) {
     });
 }
 exports.lp = lp;
+function lpPure(p) {
+    return __awaiter(this, void 0, void 0, function () {
+        var result;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, p];
+                case 1:
+                    result = _a.sent();
+                    try {
+                        return [2 /*return*/, common_1.Result.parse(result)];
+                    }
+                    catch (ex) {
+                        throw ex;
+                    }
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.lpPure = lpPure;
+function buildCmdOption(word) {
+    var cmdOption = '';
+    if (word.pos.length) {
+        cmdOption += " -p " + word.pos.join(',');
+    }
+    if (word.explanation) {
+        cmdOption += " -e " + word.explanation;
+    }
+    if (word.tag.length) {
+        cmdOption += " -t " + word.tag.join(',');
+    }
+    return cmdOption;
+}
+/**
+ * 对象转换为 add 命令行
+ * @param word 单词对象
+ */
+function addRecommendCmd(word) {
+    return "wordbook add" + buildCmdOption(word) + " " + word.word;
+}
+exports.addRecommendCmd = addRecommendCmd;
+/**
+ * 对象转换为 modify 命令行
+ * @param word 单词对象
+ */
+function modifyRecommendCmd(word) {
+    return "wordbook modify" + buildCmdOption(word) + " " + word.word;
+}
+exports.modifyRecommendCmd = modifyRecommendCmd;
 /**
  * 打印单词
  * @param word 要输出的单词
