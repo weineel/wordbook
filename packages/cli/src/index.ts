@@ -2,7 +2,7 @@
 
 import program from 'commander'
 import chalk from 'chalk'
-import { add, search, getByWord, deleteByWords } from '@wordbook/backend'
+import { close, add, search, getByWord, deleteByWords, updateByWord } from '@wordbook/backend'
 import { Word, ErrorCode } from '@wordbook/common'
 import { lp, printTintingWrod, cmd2wordObj } from './utils'
 
@@ -31,6 +31,8 @@ program
       } else {
         console.error(ex)
       }
+    } finally {
+      close()
     }
   })
   
@@ -38,25 +40,54 @@ program
   .command('delete <word> [otherWords...]')
   .description('删除单词')
   .action(async (word, otherWords, cmd) => {
-    await lp(deleteByWords([word, ...otherWords]))
+    try {
+      await lp(deleteByWords([word, ...otherWords]))
+    } catch (ex) {
+      console.log(ex)
+    } finally {
+      close()
+    }
   })
 
 program
   .command('modify <word>')
   .description('修改一个单词')
-  .option('-p, --pos <a>[,b]*', '修改词性，多个时使用 , 隔开。')
+  .option('-p, --pos <a>[,b]*', '修改词性，多个时使用 , 隔开。', list)
   .option('-e, --explanation <explanation>', '修改解释。')
-  .option('-t, --tag <a>[,b]*', '修改标签，多个时使用 , 隔开。')
-  // wordbook modify word -s , nthSample 为 true； wordbook modify word， nthSample 为 undefined
-  .option('-s, --nth-sample [nthSample][,nthSample]*', '要操作的例句下标。', list)
-  .option('-n, --nth-note [nthNote][,nthNote]*', '要操作的笔记下标。', list)
-  .option('--add-sample <smaple>', '添加例句。')
-  .option('--add-note <note>', '添加笔记。')
-  .option('--delete', '删除例句或笔记。')
-  .option('--sample <sample>', '要修改成的例句内容。')
-  .option('--note <note>', '要修改成的笔记内容。')
-  .action((word, cmd) => {
-    console.warn(word, cmd.nthSample, cmd.nthNote)
+  .option('-t, --tag <a>[,b]*', '修改标签，多个时使用 , 隔开。', list)
+  // wordbook modify word --ns: nthSample 为 true； wordbook modify word: nthSample 为 undefined
+  .option('--ns [nthSample][,nthSample]*', '要操作的例句下标。', list)
+  .option('--nn [nthNote][,nthNote]*', '要操作的笔记下标。', list)
+  .option('-a, --add', '添加例句或笔记。')
+  .option('-d, --delete', '删除例句或笔记。')
+  .option('-s, --sample <sample>', '要修改成的例句内容。')
+  .option('-n, --note <note>', '要修改成的笔记内容。')
+  .action(async (word, cmd) => {
+    try {
+      const wordObj: Word = await lp(getByWord(word))
+      const inputWord = cmd2wordObj(word, cmd)
+      if (inputWord.pos.length) {
+        wordObj.pos = inputWord.pos
+      }
+      if (inputWord.tag.length) {
+        wordObj.tag = inputWord.tag
+      }
+      if (inputWord.explanation) {
+        wordObj.explanation = inputWord.explanation
+      }
+      await lp(updateByWord(wordObj))
+    } catch (ex) {
+      // 单词可能不存在
+      if (ex.code === ErrorCode.NotExist) {
+        const recommendCmd = `wordbook add ${word}`
+        console.log()
+        console.log(`建议使用：${chalk.yellow(recommendCmd)} 命令进行添加`)
+      } else {
+        console.error(ex)
+      }
+    } finally {
+      close()
+    }
   })
 
 program
@@ -75,6 +106,8 @@ program
       } else {
         console.error(ex)
       }
+    } finally {
+      close()
     }
   })
 
@@ -89,8 +122,14 @@ program
   .option('-p, --page <page>', '页码，从1开始')
   .option('-l, --length <length>', '每页的个数, 默认10')
   .action(async (keyword, cmd) => {
-    console.warn(keyword, cmd.page || 1, cmd.length || 10, cmd.word, cmd.explanation, cmd.sample, cmd.note)
-    console.log(JSON.stringify(await lp(search())))
+    try {
+      console.warn(keyword, cmd.page || 1, cmd.length || 10, cmd.word, cmd.explanation, cmd.sample, cmd.note)
+      console.log(JSON.stringify(await lp(search())))
+    } catch (ex) {
+      console.log(ex)
+    } finally {
+      close()
+    }
   })
 
 program

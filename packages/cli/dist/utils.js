@@ -100,7 +100,7 @@ function printTintingWrod(word, options) {
     console.log();
     var str = "\uD83D\uDEA9 " + chalk_1.default.blueBright(word.word);
     if (options.pos) {
-        str += " " + word.pos + ".";
+        str += " " + word.pos.join(', ') + ".";
     }
     if (options.explanation) {
         str += " " + chalk_1.default.yellow(word.explanation) + "\n";

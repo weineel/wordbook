@@ -8,10 +8,10 @@ import { Word } from '@wordbook/common'
  */
 export function rows2word(wordRow: any, sampleRows?: any[], noteRows?: any[]): Word {
   return {
-    word: wordRow.word,
-    pos: wordRow.pos,
-    explanation: wordRow.explanation,
-    tag: wordRow.tag && wordRow.tag.split(','),  // 数据库中是逗号隔开的字符串
+    word: wordRow.word || '',
+    pos: (wordRow.pos && wordRow.pos.split(',')) || [],
+    explanation: wordRow.explanation || '',
+    tag: (wordRow.tag && wordRow.tag.split(',')) || [],  // 数据库中是逗号隔开的字符串
     sample: [],
     note: []
   }

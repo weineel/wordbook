@@ -8,10 +8,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 function rows2word(wordRow, sampleRows, noteRows) {
     return {
-        word: wordRow.word,
-        pos: wordRow.pos,
-        explanation: wordRow.explanation,
-        tag: wordRow.tag && wordRow.tag.split(','),
+        word: wordRow.word || '',
+        pos: (wordRow.pos && wordRow.pos.split(',')) || [],
+        explanation: wordRow.explanation || '',
+        tag: (wordRow.tag && wordRow.tag.split(',')) || [],
         sample: [],
         note: []
     };
