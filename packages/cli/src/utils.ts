@@ -33,25 +33,28 @@ export function cmd2wordObj(word: string, cmd: any): Word {
 /**
  * 等待 异步接口, 默认操作
  */
-export async function lp(p: Promise<Result<any>>, loadingMessage?: string): Promise<any | undefined> {
-  spinner.start(loadingMessage || 'loading...')
+export async function lp(p: Promise<Result<any>>, errorMessage?: string, successMessage?: string, loadingMessage?: string): Promise<any | undefined> {
+  spinner.start(loadingMessage || '加载中...')
   const result: Result<any> = await p
   try {
     const data = Result.parse(result)
-    spinner.succeed(tintingForKeyword(result.message))
+    spinner.succeed(tintingForKeyword(successMessage || result.message))
     return data
   } catch (ex) {
-    spinner.fail(chalk.red(tintingForKeyword(result.message)))
+    spinner.fail(chalk.red(tintingForKeyword(errorMessage || result.message)))
     throw ex
   }
 }
 
-export async function lpPure(p: Promise<Result<any>>): Promise<any | undefined> {
+export async function lpPure(p: Promise<Result<any>>, loadingMessage?: string): Promise<any | undefined> {
+  spinner.start(loadingMessage || '加载中...')
   const result: Result<any> = await p
   try {
     return Result.parse(result)
   } catch (ex) {
     throw ex
+  } finally {
+    spinner.stop()
   }
 }
 

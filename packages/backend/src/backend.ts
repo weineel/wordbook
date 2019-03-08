@@ -1,6 +1,8 @@
 import db from './database'
-import { Word, Result } from '@wordbook/common'
+import { Word, Result, SearchOptions } from '@wordbook/common'
 import { rows2word } from './utils'
+
+const debug = require('debug')('backend')
 
 const _db = db()
 
@@ -81,10 +83,36 @@ export function updateByWord(word: Word): Promise<Result<void>> {
   })
 }
 
-export function search(page?: any): Promise<Result<Word[]>> {
+export function search(options: SearchOptions): Promise<Result<Word[]>> {
+  const page = options.page || 1
+  const length = options.length || 10
+  let sql = `select * from word`
+  const condition = []
+  if (options.keyword) {
+    if (options.word) {
+      condition.push(`word like "%${options.keyword}%"`)
+    }
+    if (options.explanation) {
+      condition.push(`explanation like "%${options.keyword}%"`)
+    }
+  }
+  let prefix = ' where '
+  if (condition.length) {
+    sql += `${prefix}${condition.join(' or ')}`
+  }
+  prefix = condition.length ? '' : prefix
+  if (options.tag) {
+    if (prefix) {
+      sql += `${prefix} tag like "%${options.tag}%"`
+    } else {
+      sql += ` and tag like "%${options.tag}%"`
+    }
+  }
+  sql += ` limit ${length} offset ${(page - 1) * length}`
+  debug(sql)
   return new Promise((resolve, reject) => {
     _db.all(
-      'select * from word',
+      sql,
       function(err: any, rows: []) {
         if (err) {
           resolve(Result.failure('failure: ' + err))

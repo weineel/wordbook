@@ -3,7 +3,7 @@
 import program from 'commander'
 import chalk from 'chalk'
 import { close, add, search, getByWord, deleteByWords, updateByWord } from '@wordbook/backend'
-import { Word, ErrorCode } from '@wordbook/common'
+import { Word, ErrorCode, SearchOptions } from '@wordbook/common'
 import { lp, lpPure, printTintingWrod, cmd2wordObj, addRecommendCmd, modifyRecommendCmd } from './utils'
 
 program
@@ -123,8 +123,22 @@ program
   .option('-l, --length <length>', '每页的个数, 默认10')
   .action(async (keyword, cmd) => {
     try {
-      console.warn(keyword, cmd.page || 1, cmd.length || 10, cmd.word, cmd.explanation, cmd.sample, cmd.note)
-      console.log(JSON.stringify(await lp(search())))
+      const words: Word[] = await lp(search({
+        keyword,
+        tag: cmd.tag,
+        word: cmd.word,
+        explanation: cmd.explanation,
+        page: cmd.page,
+        length: cmd.length
+      }))
+      if (words.length) {
+        for (const word of words) {
+          printTintingWrod(word)
+        }
+      } else {
+        console.log(chalk.yellow('没找到符合条件的单词。'))
+      }
+      // printTintingWrod(wordObj)
     } catch (ex) {
       console.log(ex)
     } finally {

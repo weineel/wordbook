@@ -61,23 +61,23 @@ exports.cmd2wordObj = cmd2wordObj;
 /**
  * 等待 异步接口, 默认操作
  */
-function lp(p, loadingMessage) {
+function lp(p, errorMessage, successMessage, loadingMessage) {
     return __awaiter(this, void 0, void 0, function () {
         var result, data;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    spinner.start(loadingMessage || 'loading...');
+                    spinner.start(loadingMessage || '加载中...');
                     return [4 /*yield*/, p];
                 case 1:
                     result = _a.sent();
                     try {
                         data = common_1.Result.parse(result);
-                        spinner.succeed(tintingForKeyword(result.message));
+                        spinner.succeed(tintingForKeyword(successMessage || result.message));
                         return [2 /*return*/, data];
                     }
                     catch (ex) {
-                        spinner.fail(chalk_1.default.red(tintingForKeyword(result.message)));
+                        spinner.fail(chalk_1.default.red(tintingForKeyword(errorMessage || result.message)));
                         throw ex;
                     }
                     return [2 /*return*/];
@@ -86,12 +86,14 @@ function lp(p, loadingMessage) {
     });
 }
 exports.lp = lp;
-function lpPure(p) {
+function lpPure(p, loadingMessage) {
     return __awaiter(this, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, p];
+                case 0:
+                    spinner.start(loadingMessage || '加载中...');
+                    return [4 /*yield*/, p];
                 case 1:
                     result = _a.sent();
                     try {
@@ -99,6 +101,9 @@ function lpPure(p) {
                     }
                     catch (ex) {
                         throw ex;
+                    }
+                    finally {
+                        spinner.stop();
                     }
                     return [2 /*return*/];
             }

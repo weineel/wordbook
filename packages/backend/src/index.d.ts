@@ -1,4 +1,4 @@
-import { Word, Result } from '@wordbook/common'
+import { Word, Result, SearchOptions } from '@wordbook/common'
 
 /**
  * 关闭数据库
@@ -33,4 +33,4 @@ export function updateByWord(word: Word): Promise<Result<void>>
 /**
  * 搜索单词
  */
-export function search(page?: any): Promise<Result<Word[]>>
+export function search(page: SearchOptions): Promise<Result<Word[]>>

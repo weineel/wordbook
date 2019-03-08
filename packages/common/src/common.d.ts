@@ -7,6 +7,15 @@ export declare interface Word {
   note: string[]
 }
 
+export interface SearchOptions {
+  keyword?: string,
+  tag?: string,
+  word: boolean,
+  explanation: boolean,
+  page?: number,
+  length?: number
+}
+
 export declare enum ErrorCode {
   Success,
   Failure,

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var database_1 = __importDefault(require("./database"));
 var common_1 = require("@wordbook/common");
 var utils_1 = require("./utils");
+var debug = require('debug')('backend');
 var _db = database_1.default();
 function close(cb) {
     _db.close(cb);
@@ -79,9 +80,36 @@ function updateByWord(word) {
     });
 }
 exports.updateByWord = updateByWord;
-function search(page) {
+function search(options) {
+    var page = options.page || 1;
+    var length = options.length || 10;
+    var sql = "select * from word";
+    var condition = [];
+    if (options.keyword) {
+        if (options.word) {
+            condition.push("word like \"%" + options.keyword + "%\"");
+        }
+        if (options.explanation) {
+            condition.push("explanation like \"%" + options.keyword + "%\"");
+        }
+    }
+    var prefix = ' where ';
+    if (condition.length) {
+        sql += "" + prefix + condition.join(' or ');
+    }
+    prefix = condition.length ? '' : prefix;
+    if (options.tag) {
+        if (prefix) {
+            sql += prefix + " tag like \"%" + options.tag + "%\"";
+        }
+        else {
+            sql += " and tag like \"%" + options.tag + "%\"";
+        }
+    }
+    sql += " limit " + length + " offset " + (page - 1) * length;
+    debug(sql);
     return new Promise(function (resolve, reject) {
-        _db.all('select * from word', function (err, rows) {
+        _db.all(sql, function (err, rows) {
             if (err) {
                 resolve(common_1.Result.failure('failure: ' + err));
             }
