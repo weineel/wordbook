@@ -69,13 +69,13 @@ wordbook add --help
 
 ### 5. `search [options] [keyword]`     模糊搜索单词，默认搜索 word、explanation 字段
 
-* [ ] `-w, --no-word`          不搜索 word 字段。
-* [ ] `-e, --no-explanation`   不搜索解释字段。
+* [x] `-w, --no-word`          不搜索 word 字段。
+* [x] `-e, --no-explanation`   不搜索解释字段。
 * [ ] `-s, --sample`           搜索例句字段。
 * [ ] `-n, --note`             搜索笔记字段。
-* [ ] `-t, --tag [a][,b]*`     指定搜索的标签(精确匹配)，多个时使用 , 隔开。
-* [ ] `-p, --page <page>`      页码，从1开始
-* [ ] `-l, --length <length>`  每页的个数, 默认10
+* [x] `-t, --tag [a][,b]*`     指定搜索的标签(精确匹配)，多个时使用 , 隔开。
+* [x] `-p, --page <page>`      页码，从1开始
+* [x] `-l, --length <length>`  每页的个数, 默认10
 
 ### 6. `tags [options]`                 标签管理
 
