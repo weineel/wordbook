@@ -1,6 +1,6 @@
 {
   "name": "@wordbook/backend",
-  "version": "0.0.1-alpha.8",
+  "version": "0.0.1-alpha.9",
   "description": "单词数据库接口",
   "author": "weineel <LiJF_wn@163.com>",
   "homepage": "https://github.com/weineel/wordbook#readme",
@@ -27,7 +27,7 @@
     "url": "https://github.com/weineel/wordbook/issues"
   },
   "dependencies": {
-    "@wordbook/common": "^0.0.1-alpha.8",
+    "@wordbook/common": "^0.0.1-alpha.9",
     "debug": "^4.1.1",
     "sqlite3": "^4.0.6"
   },
