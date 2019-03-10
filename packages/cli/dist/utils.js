@@ -163,7 +163,6 @@ function printTintingWrod(word, options) {
         str += chalk_1.default.grey('标签:') + " " + word.tag.join(' ');
     }
     console.log(str);
-    console.log();
 }
 exports.printTintingWrod = printTintingWrod;
 //# sourceMappingURL=utils.js.map

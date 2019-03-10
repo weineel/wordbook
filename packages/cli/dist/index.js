@@ -183,6 +183,7 @@ commander_1.default
                 wordObj = _a.sent();
                 if (wordObj)
                     utils_1.printTintingWrod(wordObj);
+                console.log();
                 return [3 /*break*/, 4];
             case 2:
                 ex_4 = _a.sent();
@@ -238,6 +239,7 @@ commander_1.default
                 else {
                     console.log(chalk_1.default.yellow('没找到符合条件的单词。'));
                 }
+                console.log();
                 return [3 /*break*/, 4];
             case 2:
                 ex_5 = _a.sent();

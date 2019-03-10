@@ -111,5 +111,4 @@ export function printTintingWrod(word: Word, options: TintingOption = {
     str += `${chalk.grey('标签:')} ${word.tag.join(' ')}`
   }
   console.log(str)
-  console.log()
 }

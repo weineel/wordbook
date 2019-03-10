@@ -97,6 +97,7 @@ program
     try {
       const wordObj: Word = await lp(getByWord(word))
       if (wordObj) printTintingWrod(wordObj)
+      console.log()
     } catch (ex) {
       // 单词可能不存在
       if (ex.code === ErrorCode.NotExist) {
@@ -138,7 +139,7 @@ program
       } else {
         console.log(chalk.yellow('没找到符合条件的单词。'))
       }
-      // printTintingWrod(wordObj)
+      console.log()
     } catch (ex) {
       console.log(ex)
     } finally {
