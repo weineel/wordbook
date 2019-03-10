@@ -1,6 +1,6 @@
 {
   "name": "@wordbook/cli",
-  "version": "0.0.1-alpha.9",
+  "version": "0.0.1",
   "description": "单词本命令行",
   "author": "weineel <LiJF_wn@163.com>",
   "homepage": "https://github.com/weineel/wordbook#readme",
