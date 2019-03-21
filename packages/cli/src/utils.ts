@@ -102,7 +102,7 @@ export function printTintingWrod(word: Word, options: TintingOption = {
   console.log()
   let str: string = `🚩 ${chalk.blueBright(word.word)}`
   if (options.pos) {
-    str += ` ${word.pos.join(', ')}.`
+    str += ` ${word.pos.join('. ')}.`
   }
   if (options.explanation) {
     str += ` ${chalk.yellow(word.explanation)}\n`
