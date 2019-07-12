@@ -35,7 +35,6 @@ wordbook --help
 wordbook add --help
 ```
 
-
 ## Feature & Plan
 
 ### 1. `add [options] <word>` 添加一个单词，不能添加已经存在的单词。
@@ -45,7 +44,6 @@ wordbook add --help
 * [ ] `-s, --sample <sample>`            例句。
 * [ ] `-n, --note <note>`                笔记。
 * [x] `-t, --tag <a>[,b]*`               标签，多个时使用 , 隔开。
-
 
 ### 2. `delete <word> [otherWords...]`  删除单词
 
@@ -80,7 +78,6 @@ wordbook add --help
 ### 6. `tags [options]`                 标签管理
 
 * [ ] `-l, --list`  列出所有标签
-
 
 ### 7. `ui [options]`  打开webapp。
 
